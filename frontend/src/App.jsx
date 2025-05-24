@@ -1,13 +1,23 @@
-import React from 'react'
+// frontend/src/App.jsx
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import Plans from './pages/Plans';
+import SendEmail from './pages/SendEmail';
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/send-email" element={<SendEmail />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
