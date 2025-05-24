@@ -1,4 +1,3 @@
-// backend/routes/planRoutes.js
 const express = require('express');
 const { getPlans, updatePlan } = require('../controllers/planController');
 const authMiddleware = require('../middleware/authMiddleware');

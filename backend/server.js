@@ -7,6 +7,9 @@ const planRoutes = require('./routes/planRoutes');
 const multer = require('multer');
 const path = require('path');
 
+// Load environment variables from .env file
+require('dotenv').config();
+
 const app = express();
 
 // Connect to MongoDB

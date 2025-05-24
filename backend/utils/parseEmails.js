@@ -1,4 +1,3 @@
-// backend/utils/parseEmails.js
 const fs = require('fs');
 const csv = require('csv-parser');
 const validator = require('validator');
@@ -11,7 +10,7 @@ const parseEmails = (filePath, fileType) => {
       fs.createReadStream(filePath)
         .pipe(csv())
         .on('data', (row) => {
-          const email = Object.values(row)[0]; // Assumes email is in the first column
+          const email = Object.values(row)[0];
           if (validator.isEmail(email)) emails.push(email);
         })
         .on('end', () => resolve(emails))

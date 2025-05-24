@@ -1,4 +1,3 @@
-// backend/utils/planChecker.js
 const checkPlanLimits = (user, numberOfEmails) => {
   const today = new Date().setHours(0, 0, 0, 0);
   if (user.lastResetDate < today) {

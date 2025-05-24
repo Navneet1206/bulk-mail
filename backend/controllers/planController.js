@@ -1,4 +1,3 @@
-// backend/controllers/planController.js
 const User = require('../models/User');
 const Plan = require('../models/Plan');
 
