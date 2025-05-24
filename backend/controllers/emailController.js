@@ -3,6 +3,8 @@ const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const validator = require('validator');
+const { checkPlanLimits } = require('../utils/planChecker');
+
 
 const templates = [
   { id: 1, name: 'Basic 1', html: '<h1>{{subject}}</h1><p>{{message}}</p>', type: 'basic' },
@@ -11,6 +13,7 @@ const templates = [
   { id: 6, name: 'Premium 1', html: '<img src="cid:logo" /><h1>{{subject}}</h1><p>{{message}}</p>', type: 'premium' },
   // Add 4 more premium templates
 ];
+
 
 exports.getTemplates = async (req, res) => {
   const user = await User.findById(req.user.id).populate('plan');
@@ -23,6 +26,14 @@ exports.sendEmails = async (req, res) => {
   const file = req.files.file[0];
   const logo = req.files.logo ? req.files.logo[0] : null;
   const user = await User.findById(req.user.id).populate('plan');
+
+const emailLog = new EmailLog({
+  userId: user._id,
+  emailsSent: numberOfEmails,
+  templateUsed: templateId,
+});
+await emailLog.save();
+checkPlanLimits(user, numberOfEmails);
 
   // Reset daily count
   const today = new Date().setHours(0, 0, 0, 0);
