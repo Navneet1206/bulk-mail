@@ -37,10 +37,10 @@ const SendEmail = () => {
   return (
     <div className="max-w-md mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Send Bulk Email</h2>
-      <div onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input type="email" name="senderEmail" placeholder="Sender Email" onChange={handleChange} className="w-full mb-2 p-2 border" />
         <input type="password" name="appPassword" placeholder="App Password" onChange={handleChange} className="w-full mb-2 p-2 border" />
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} accept=".csv,.xls,.txt" className="w-full mb-2" />
+        <input type="file" onChange={(e) => setFile(e.target.files[0])} accept=".csv,.txt" className="w-full mb-2" />
         <select onChange={(e) => setSelectedTemplate(e.target.value)} className="w-full mb-2 p-2 border">
           <option value="">Select Template</option>
           {templates.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
@@ -50,8 +50,8 @@ const SendEmail = () => {
         {selectedTemplate && templates.find(t => t.id == selectedTemplate)?.type === 'premium' && (
           <input type="file" onChange={(e) => setLogo(e.target.files[0])} accept="image/*" className="w-full mb-2" />
         )}
-        <button onClick={handleSubmit} className="w-full bg-blue-500 text-white p-2">Send Emails</button>
-      </div>
+        <button type="submit" className="w-full bg-blue-500 text-white p-2">Send Emails</button>
+      </form>
     </div>
   );
 };
